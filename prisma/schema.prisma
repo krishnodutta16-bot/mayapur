@@ -1,0 +1,67 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  createdAt    DateTime @default(now())
+  memories     Memory[]
+  photos       Photo[]
+  notes        Note[]
+}
+
+model Memory {
+  id          String   @id @default(cuid())
+  title       String
+  body        String
+  place       String   @default("")
+  happenedAt  DateTime
+  createdAt   DateTime @default(now())
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById String
+}
+
+model Photo {
+  id          String   @id @default(cuid())
+  title       String
+  caption     String   @default("")
+  place       String   @default("")
+  filename    String
+  mimeType    String
+  happenedAt  DateTime
+  createdAt   DateTime @default(now())
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById String
+}
+
+model Anniversary {
+  id        String   @id @default(cuid())
+  title     String
+  kind      String
+  date      DateTime
+  note      String   @default("")
+  createdAt DateTime @default(now())
+}
+
+model Note {
+  id          String   @id @default(cuid())
+  title       String
+  body        String
+  createdAt   DateTime @default(now())
+  createdBy   User     @relation(fields: [createdById], references: [id])
+  createdById String
+}
+
+model Setting {
+  id            String   @id @default("couple")
+  togetherSince DateTime
+  homeQuote     String   @default("আমাদের স্বপ্নের রাজ্য, যেখানে প্রতিটি স্মৃতি বেঁচে থাকবে।")
+}

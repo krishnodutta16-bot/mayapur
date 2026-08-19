@@ -1,0 +1,202 @@
+@import "tailwindcss";
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --font-display: "Baloo Da 2", serif;
+  --font-body: "Hind Siliguri", sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-moon: var(--moon);
+  --color-star: var(--star);
+  --color-firefly: var(--firefly);
+  --color-glass: var(--glass);
+}
+
+:root {
+  --radius: 0.625rem;
+  --background: oklch(0.16 0.07 285);
+  --foreground: oklch(0.96 0.02 320);
+  --card: oklch(0.22 0.08 288);
+  --primary: oklch(0.78 0.14 350);
+  --primary-foreground: oklch(0.19 0.07 300);
+  --muted: oklch(0.28 0.08 290);
+  --muted-foreground: oklch(0.8 0.05 320);
+  --accent: oklch(0.72 0.13 300);
+  --border: oklch(0.98 0.02 320 / 16%);
+  --input: oklch(0.98 0.02 320 / 20%);
+  --moon: oklch(0.95 0.05 320);
+  --star: oklch(0.98 0.02 300);
+  --firefly: oklch(0.9 0.16 95);
+  --glass: oklch(0.98 0.02 320 / 8%);
+  --gradient-night: linear-gradient(
+    180deg,
+    oklch(0.13 0.07 285) 0%,
+    oklch(0.2 0.1 295) 45%,
+    oklch(0.34 0.12 330) 100%
+  );
+  --gradient-dream: linear-gradient(120deg, oklch(0.82 0.14 350), oklch(0.75 0.13 300));
+  --shadow-dream: 0 20px 60px -20px oklch(0.75 0.15 330 / 55%);
+  --shadow-moon: 0 0 80px 20px oklch(0.9 0.08 320 / 35%);
+}
+
+* {
+  border-color: var(--color-border);
+}
+
+html,
+body {
+  min-height: 100%;
+}
+
+body {
+  background: var(--gradient-night);
+  background-attachment: fixed;
+  color: var(--color-foreground);
+  font-family: var(--font-body);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.glass-panel {
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  border: 1px solid var(--color-border);
+  box-shadow: var(--shadow-dream);
+}
+
+.text-dream {
+  background: var(--gradient-dream);
+  background-clip: text;
+  color: transparent;
+}
+
+.btn-dream {
+  background-image: var(--gradient-dream);
+  color: var(--primary-foreground);
+  box-shadow: var(--shadow-dream);
+}
+
+input,
+textarea,
+select {
+  width: 100%;
+  border-radius: 1rem;
+  border: 1px solid var(--color-input);
+  background: oklch(0.18 0.07 285 / 70%);
+  padding: 0.75rem 1rem;
+  color: var(--foreground);
+  outline: none;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  box-shadow: 0 0 0 3px oklch(0.78 0.14 350 / 25%);
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 0.2;
+    transform: scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(24px, -28px);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+@keyframes float-up {
+  0% {
+    transform: translateY(20vh) scale(0.7);
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translateY(-90vh) scale(1.1);
+    opacity: 0;
+  }
+}
+
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0;
+  }
+  15% {
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(105vh) rotate(420deg);
+    opacity: 0;
+  }
+}
+
+@keyframes glow-pulse {
+  0%,
+  100% {
+    filter: drop-shadow(0 0 18px oklch(0.85 0.1 330 / 45%));
+  }
+  50% {
+    filter: drop-shadow(0 0 36px oklch(0.9 0.14 340 / 75%));
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-twinkle {
+  animation: twinkle 4s ease-in-out infinite;
+}
+.animate-drift {
+  animation: drift 18s ease-in-out infinite;
+}
+.animate-firefly {
+  animation: float-up 14s linear infinite;
+}
+.animate-petal {
+  animation: petal-fall 16s linear infinite;
+}
+.animate-glow-pulse {
+  animation: glow-pulse 5s ease-in-out infinite;
+}
+.animate-rise-in {
+  animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
